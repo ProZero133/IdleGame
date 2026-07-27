@@ -1,0 +1,14 @@
+{
+  // Tests (tests/). Tercera configuracion que hereda el rigor de tsconfig.base.json:
+  // los tests se comprueban con las MISMAS reglas que el codigo que verifican, porque
+  // un test que compila mas laxo que su sujeto puede pasar por casualidad.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": []
+  },
+  "include": ["tests"]
+}

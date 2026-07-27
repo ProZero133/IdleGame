@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Instalado o generado
+node_modules
+dist
+dist-ssr
+*.local
+coverage
+.vite
+
+# Cache incremental de TypeScript. Hoy `tsBuildInfoFile` la manda a node_modules/.tmp/
+# (ya ignorado), pero si alguien cambia esa ruta en un tsconfig acabaria un fichero
+# binario de varios MB en el repositorio sin que nadie lo note.
+*.tsbuildinfo
+
+# Variables de entorno. El proyecto no tiene backend ni secretos previstos, pero si
+# algun dia aparece una clave (un servidor TURN de pago, por ejemplo) esto evita el
+# accidente clasico. `.env.example` si se versiona, que es su razon de ser.
+.env
+.env.*
+!.env.example
+
+# Guardados de partida exportados al probar (GDD 12.5). Contienen el estado de una
+# campana real y no tienen por que acabar en el repositorio.
+*.yunque
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Basura del sistema operativo. El scaffold solo traia la de macOS (.DS_Store) y el
+# desarrollo es en Windows, que es justo la que se colaba.
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/

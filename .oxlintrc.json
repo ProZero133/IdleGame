@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  },
+  "overrides": [
+    {
+      "files": ["src/core/**"],
+      "rules": {
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "Date",
+            "message": "El tiempo entra como parametro en TickContext (GDD 4). Ni Date.now() ni new Date(): leer el reloj aqui rompe el determinismo y deja falsear cooldowns. Anotar tipos Date si sigue permitido."
+          },
+          {
+            "name": "performance",
+            "message": "El tiempo entra como parametro en TickContext (GDD 4)."
+          },
+          {
+            "name": "crypto",
+            "message": "Los identificadores del estado se derivan del PRNG con semilla de core/rng.ts (GDD 12.6)."
+          },
+          {
+            "name": "window",
+            "message": "El nucleo no toca el DOM (GDD 12.6). Ademas impediria simular en un worker o en tests."
+          },
+          {
+            "name": "document",
+            "message": "El nucleo no toca el DOM (GDD 12.6). Ademas impediria simular en un worker o en tests."
+          },
+          {
+            "name": "localStorage",
+            "message": "El nucleo es puro: la persistencia vive en src/persist/ (GDD 12.5)."
+          },
+          {
+            "name": "sessionStorage",
+            "message": "El nucleo es puro: la persistencia vive en src/persist/ (GDD 12.5)."
+          },
+          {
+            "name": "fetch",
+            "message": "El nucleo es puro: la red vive en src/net/ (GDD 12.4)."
+          }
+        ],
+        "no-restricted-properties": [
+          "error",
+          {
+            "object": "Math",
+            "property": "random",
+            "message": "Usa el PRNG con semilla de core/rng.ts (GDD 12.6). Math.random hace divergir a dos pares con el mismo estado. El resto de Math (floor, min, abs...) si esta permitido."
+          }
+        ]
+      }
+    }
+  ]
+}

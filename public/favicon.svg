@@ -1,0 +1,5 @@
+<!-- Marcador de posicion: silueta de yunque. El arte de verdad es T5.1. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#2b2622" />
+  <path d="M6 12h13l3 3h4l-3 4H13l-2 3h5v2H8v-2l3-4H8a2 2 0 0 1-2-2v-4z" fill="#d9c7a3" />
+</svg>

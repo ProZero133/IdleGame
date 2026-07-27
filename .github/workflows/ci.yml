@@ -1,0 +1,35 @@
+# Verificacion en cada push y en cada pull request.
+#
+# Los tres pasos son los mismos que se ejecutan en local, sin duplicar logica: si algo
+# hay que cambiar, se cambia en package.json y este fichero lo hereda.
+name: Verificacion
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Misma version mayor que en desarrollo. Subirla aqui sin subirla en local
+          # es la forma habitual de que el CI falle por algo que nadie puede reproducir.
+          node-version: '24'
+          cache: npm
+
+      # npm ci en vez de npm install: instala EXACTAMENTE lo del package-lock.json.
+      - run: npm ci
+
+      # Tipos primero: es lo mas rapido de fallar y lo que mas informacion da.
+      - run: npm run typecheck
+
+      # oxlint + prettier --check. Incluye la regla que prohibe el reloj y el azar
+      # dentro de src/core/ (GDD 12.6), asi que un fallo aqui puede ser un problema
+      # de determinismo, no solo de estilo.
+      - run: npm run lint
+
+      - run: npm test

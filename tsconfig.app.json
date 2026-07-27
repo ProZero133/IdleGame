@@ -1,0 +1,15 @@
+{
+  // Codigo del juego (src/). El rigor y el modo bundler salen de tsconfig.base.json;
+  // aqui solo queda lo propio del navegador.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}

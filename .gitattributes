@@ -1,0 +1,11 @@
+# Finales de linea normalizados a LF dentro del repositorio.
+#
+# Sin este fichero, lo que se sube depende de la configuracion `core.autocrlf` de cada
+# maquina. En la actual esta en `true` (LF en el repositorio, CRLF en el disco), asi que
+# hoy todo va bien, pero es configuracion LOCAL: alguien que clone sin ella subiria CRLF
+# y cada fichero que tocara apareceria en el diff como reescrito entero, enterrando el
+# cambio real. Declararlo aqui hace que la norma viaje con el repositorio.
+#
+# `text=auto` deja que git detecte solo lo que es binario (imagenes, fuentes) y no lo
+# toque.
+* text=auto eol=lf

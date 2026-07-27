@@ -1,0 +1,43 @@
+{
+  // Opciones COMPARTIDAS por todas las configuraciones del proyecto (app, node y,
+  // cuando llegue T0.1.5, los tests). Existe para que el rigor no se bifurque: si
+  // cada tsconfig declarase su propia lista, con el tiempo una se quedaria atras.
+  // Lo especifico de cada entorno (lib, types, module, jsx) vive en su fichero.
+  "compilerOptions": {
+    "target": "es2023",
+    "skipLibCheck": true,
+
+    /* Modo bundler: Vite transpila, TypeScript solo comprueba tipos. */
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* --- Rigor (T0.1.2) ---
+       Estas cuatro son la red de seguridad del nucleo de simulacion, donde un
+       error de tipos se convierte en un estado divergente entre pares. Bajarlas
+       hace el codigo mas comodo de escribir hoy y mas caro de depurar despues. */
+
+    // Familia completa de comprobaciones estrictas (null checks, this, funciones...).
+    "strict": true,
+
+    // arr[i] y record[clave] pasan a ser `T | undefined`. Es la mas molesta y la
+    // mas rentable: obliga a tratar el caso "esa clave no esta en el catalogo",
+    // que en un juego lleno de registros por clave estable ocurre de verdad.
+    "noUncheckedIndexedAccess": true,
+
+    // Distingue "propiedad ausente" de "propiedad presente con valor undefined".
+    // Importante para el estado serializado: lo que no esta no viaja en el snapshot.
+    "exactOptionalPropertyTypes": true,
+
+    // Sobrescribir un miembro exige la palabra `override`. Evita que renombrar un
+    // metodo en la base deje huerfana una sobrescritura que sigue compilando.
+    "noImplicitOverride": true,
+
+    /* --- Higiene (heredado del scaffold) --- */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}

@@ -1,0 +1,40 @@
+/* Base minima y neutra. La estetica de taller y pergamino que describe GDD 11 es
+   trabajo de la fase 5: aqui solo se busca que el marcador de posicion sea legible y
+   que no quede ni rastro del estilo de la plantilla de Vite. */
+
+:root {
+  color-scheme: light dark;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+}
+
+main {
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+}
+
+p {
+  margin: 0.25rem 0;
+}
+
+.nota {
+  opacity: 0.6;
+  font-size: 0.9rem;
+}

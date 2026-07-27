@@ -1,0 +1,57 @@
+# Despliegue estatico a GitHub Pages desde main.
+#
+# REQUISITO MANUAL, UNA SOLA VEZ: en Settings -> Pages del repositorio hay que poner
+# "Source: GitHub Actions". Sin eso este flujo falla en el paso de despliegue.
+#
+# El sitio queda en https://<usuario>.github.io/IdleGame/, que es exactamente el
+# prefijo declarado como `base` en vite.config.ts. Si uno cambia, el otro tambien.
+name: Desplegar a GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Permite relanzar el despliegue a mano sin tener que hacer un commit vacio.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez. No se cancelan los que ya estan en marcha: cancelar un
+# despliegue a medias puede dejar el sitio en un estado incoherente.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      # `build` ya incluye `tsc -b`, asi que un error de tipos detiene el despliegue.
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,9 @@
+# Generado o instalado
+dist
+node_modules
+coverage
+
+# Los documentos de diseno (GDD.md, README.md) estan formateados a mano: tablas
+# alineadas y diagramas de cajas dentro de bloques de codigo. Prettier los reflujaria
+# sin aportar nada y ensuciaria el diff de cualquier cambio de contenido.
+*.md

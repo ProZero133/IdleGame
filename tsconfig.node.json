@@ -1,0 +1,12 @@
+{
+  // Ficheros de configuracion que ejecuta Node (vite.config.ts). Sin DOM: si algo
+  // de aqui necesitase `window`, seria senal de que esta en el fichero equivocado.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "lib": ["ES2023"],
+    "module": "nodenext",
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts"]
+}
